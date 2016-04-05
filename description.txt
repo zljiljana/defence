@@ -1,0 +1,41 @@
+Slide 1
+This dissertation introduces a novel model for solving the L2 support vector machine and it is dubbed direct l2 support vector machine. This new SVM model leads to a significant training time improvment especially when it comes to larger datasets (say couple of million data points or so). In this presentation my intention is to give you some understanding of the theoretical and practical aspect of my research.
+*maybe some transition here*
+
+Slide 2
+Since my research is about SVM I'd like to start of with some basic properties of SVM in general:
+- used for both classification and regression analysis
+- there are very powerful and also videly popular is often used in industry and academia
+The main advantages:
+- high generalization ability (of course, this high generalization ability can only be achieved with model selection techniques to identify the best parameters for a given dataset)
+- adaptible to various problems (this means that by simply changing the kernel function we can solve quite complex problems)
+- nice mathematical property (in that in SVMs we are solving this convex problem that has one global minimum which is a great advantage in respect to some other machine learning algorithms)
+- BUT, the problem is that SVM does not scale well with the number of training points. in the recent years it has become apparent that datasets are growing and will continue to do so, this expedites development of algorithms that are fast and scale well with number of points. And that is what my research was motivated by and that is what Direct L2 SVM attempts to acheave)
+
+** As a rule of thumb I use: O(n_samples^2 * n_features) for RBF kernel using SMO solver and n_sample * n_features for linear SVMs such as liblinear also noting that strong regularization (low C) makes it faster to converge too
+
+Slide 3
+OK, so, what is the solution of SVM? 
+in nutshell, SVM algorithm outputs an optimal hyperplane which categorizes the points.
+Let's consided the following problem, find a separating line between these points
+As you can see in the picture on the left you can see that there are multiple lines that offer a solution. The questions is is any one of them better? Well, we can intuitively define a criterion to estimate the worth of the lines: the line is lets say bad if it passes too close to the points because it will be noise senstive and will not generalize correctly. So then, the goal of SVM algorithm is to find the hyperplane that gives the largest minimum distance to the training examples. We call this distance the 'margin' and we try to maximize this margin. 
+
+Slide 4
+Ok, this is a sort of a brief history of models and their representations:
+- hard-margin SVM - first SVM that was developed, linear model that enabled separation of linearly separable data, in case of non-linearly separable data this model could not find the solution
+So the Q function we are trying to minimize correspond to maximization of the margin and the constraints that you see bellow ensure that we classify the training points correctly.
+- Next, at the beginning of 90' a soft margin SVM was discovered which enables separation of overlapping data and it accomplished this by simply introducing the so called slack variables - represent the errors. Basically what this means is that by including slack variables we are relaxing this constraints and allowing some errors to be made, in other words, we are allowing some points to be on the wrong side of the margin. However we want to limit these errors, therefore you see this additional term here which controls the trade-off between the maximization of margin and minimization of errors.
+Even with this exnahncement, SVM is still not capable of dealing with hightly complex topological structures of data, and the problem was solved by mapping the input space into a high dimensional kernel space in order to enhance the linear separability of the data in that space, this process is called the kernel trick. So the only difference is that we use this function of input space as opposed to original one.
+Besides these basic or original SVM models there are few variants that were developed and are videly popular and recognized in the science community and I am pointing out only a few of them which are: Least Squares SVM, Proximal SVM, Geometric SVM because they all share certain characteristics with my model - Direct L2 SVM. I want to mention that of all of these, geometric SVM have displayed the major improvements in training times which is the reason why my comprehensive model Direct L2 SVM has almost the same problem posing as geometric SVMs
+
+Slide 5
+Direct L2 SVM
+I'll jump right into the optimization function of my problem which you can see here. Most of what you see here is the same as for original L2 SVM you saw on the previous slide. The two major additions are the term involving the bias and the term involving the parameter rho. On the right hand side of constraints you can see this new term rho which is just a scalar value. Now, steps to the solution of this problem are the following: we find the primal lagrangian, we find the KKT conditions, we rearrange these conditions and introduce new variables and solve a problem for these new variables
+
+
+
+Algorithms: 
+NNLS - active set method, iterative
+CG - slightly faster version of gradient method, requires less iterations
+NN ISDA
+
