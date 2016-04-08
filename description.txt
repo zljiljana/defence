@@ -27,11 +27,20 @@ So the cost function (the Q function here) that we are trying to optimize corres
 - Next, at the beginning of 90' a soft margin SVM was discovered which enabled separation of overlapping data and it accomplished this by simply introducing the so called slack variables which represent the errors. So the representation of this problem is given here. Basically what this means is that by including slack variables we are relaxing the constraints and allowing some errors to be made, in other words, we are allowing some points to be on the wrong side of the margin. 
 However we want to limit these errors, therefore you see this additional term here which controls the trade-off between the maximization of margin and minimization of errors. The parameter C is a regularization term, which provides a way to control overfitting. 
 Even with this enhancement, soft-margin SVM is still not capable of dealing with hightly complex topological structures of data. This problem was solved by mapping the input space into a high dimensional kernel space in order to enhance the linear separability of the data in that space, this process is called the kernel trick. This is the representation of kernel SVM, the only difference is that we use this function (phi) that works on our input space.
-Besides these basic or original SVM models there are few variants that were developed and here I am pointing out only a few: Least Squares SVM, Proximal SVM, Geometric SVM for a few reasons, they are all very populat and widely used and more importantly they all share certain characteristics with my model - DL2 SVM. I want to mention that of all of these, geometric SVM have shown major improvements in training times which is the reason why my comprehensive model Direct L2 SVM has almost the same problem posing as geometric SVMs
+Besides these basic or original SVM models there are few variants that were developed and here I am pointing out only a few: Least Squares SVM, Proximal SVM, Geometric SVM for a few reasons, all three are very popular and widely used and more importantly they all share certain characteristics with my model - DL2 SVM. I want to mention that of all of these, geometric SVM have shown major improvements in training times which is the reason why my comprehensive model Direct L2 SVM has almost the same problem representation as geometric SVM.
 
 Slide 5
-Direct L2 SVM
-I'll jump right into the optimization function of my problem which you can see here. Most of what you see here is the same as for original L2 SVM you saw on the previous slide. The two major additions are the term involving the bias and the term involving the parameter rho. On the right hand side of constraints you can see this new term rho which is just a scalar value. Now, steps to the solution of this problem are the following: we find the primal lagrangian, we find the KKT conditions, we rearrange these conditions and introduce new variables and solve a problem for these new variables
+Direct L2 SVM - I will start of this section by presenting the theory and then wrap it up with some implementation details.
+I'll jump right into the cost function of my problem which you can see here. 
+Most of what you see here is the same as for the soft margin L2 SVM you saw on the previous slide. The two major additions are the term involving the bias and the term involving the parameter rho. Also, on the right hand side of constraints you can see this new term rho which is just a scalar value. k_b and k_rho are scalar values and when they're fixed to one then the problem representation is the same as in geometric SVMs
+
+Now, steps to the solution of this problem are following: 
+1. we first define the primal lagrangian,
+2. we define the KKT conditions (both of these steps are standard steps towards the solution for this problem posing, we see nothing different there)
+3. next step is the rearrangement of these conditions 
+4. and introduction of new dual variables, these two steps are new and they lead to a system of linear equations with nonegativity constraints which is a novel L2SVM model
+
+Slide 6:
 
 
 
