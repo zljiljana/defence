@@ -42,6 +42,11 @@ Now, steps to the solution of this problem are following:
 
 Slide 6:
 
+Slide 7:
+Complementary conditions 
+Now besides the conditions on the previous page we have complementary conditions which tell us the following,
+if alpha is zero the
+by inforcing non-negativity of alpha and setting constraints to equality we can find a solution to DL2 SVM cost function. We do this by plugging in expressions for omega, b, ksi, and k_rho to out complementary condition.
 
 
 Algorithms: 
